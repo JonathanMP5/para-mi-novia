@@ -3,39 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Para mi amor 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: "Arial", sans-serif;
+      font-family: 'Roboto', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background: #ffe6f0;
       text-align: center;
+      overflow: hidden;
     }
     .pantalla {
       display: none;
       flex-direction: column;
       gap: 20px;
-      max-width: 500px;
-      padding: 20px;
-      background: white;
+      max-width: 600px;
+      padding: 30px;
+      background: rgba(255,255,255,0.95);
       border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
     }
     .pantalla.active {
       display: flex;
+      animation: fadeIn 0.7s ease;
     }
     button {
-      padding: 12px 20px;
+      padding: 14px 25px;
       border: none;
       border-radius: 12px;
       background: #ff4d88;
       color: white;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       transition: 0.3s;
+      font-family: 'Pacifico', cursive;
     }
     button:hover {
       background: #e6005c;
@@ -43,6 +49,54 @@
     .corazon {
       font-size: 80px;
       color: red;
+    }
+    #carta h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    #carta p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    #pantalla3 {
+      position: relative;
+    }
+    #carta {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.9);
+      position: relative;
+      z-index: 2;
+    }
+    #gifFondo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      z-index: 1;
+      display: none;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    /* Corazones flotando */
+    .corazonFlotante {
+      position: absolute;
+      font-size: 20px;
+      color: pink;
+      opacity: 0.8;
+      animation: float 5s linear infinite;
+    }
+    @keyframes float {
+      0% {transform: translateY(100vh) scale(0.5);}
+      100% {transform: translateY(-50px) scale(1);}
     }
   </style>
 </head>
@@ -78,10 +132,11 @@
     <h2>💌</h2>
     <p>¿Quieres leer un pequeño texto que te he escrito?</p>
     <button onclick="mostrarCarta()">¡Sí, quiero!</button>
-    <div id="carta" style="display:none; margin-top:20px;">
+    <img id="gifFondo" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Gatos abrazándose">
+    <div id="carta">
       <h3>Mi carta para ti 💕</h3>
       <p>
-       Hola celia, soy yo tu jonito, te escribo esto
+      Hola celia, soy yo tu jonito, te escribo esto
 por que hay veces que por mucho que sea
 todo lo sin vergüenza que soy ante ti no
 puedo tener esa fachada.
@@ -144,6 +199,7 @@ que te guste. Tu Jonito
   </div>
 
   <script>
+    // Funciones de navegación
     function irPantalla(num) {
       document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("active"));
       document.getElementById("pantalla" + num).classList.add("active");
@@ -163,8 +219,24 @@ que te guste. Tu Jonito
     }
 
     function mostrarCarta() {
+      document.getElementById("gifFondo").style.display = "block";
       document.getElementById("carta").style.display = "block";
     }
+
+    // Crear corazones flotantes
+    function crearCorazones() {
+      for(let i=0; i<20; i++){
+        const heart = document.createElement('div');
+        heart.className = 'corazonFlotante';
+        heart.textContent = '💖';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animationDuration = (3 + Math.random()*5) + 's';
+        heart.style.fontSize = (15 + Math.random()*30) + 'px';
+        document.body.appendChild(heart);
+      }
+    }
+    crearCorazones();
   </script>
 </body>
 </html>
+
