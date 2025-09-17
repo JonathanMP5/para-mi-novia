@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para mi amor 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #ffe6f0;
+      text-align: center;
+    }
+    .pantalla {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .pantalla.active {
+      display: flex;
+    }
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      background: #ff4d88;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #e6005c;
+    }
+    .corazon {
+      font-size: 80px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla 1 -->
+  <div class="pantalla active" id="pantalla1">
+    <h2>Hola amor 💕</h2>
+    <p>Esto es algo para ti, ¿quieres pasar a la siguiente pantalla?</p>
+    <div>
+      <button onclick="irPantalla(2)">Sí</button>
+      <button onclick="mostrarCorazon()">No</button>
+    </div>
+    <div id="corazonRoto" style="display:none;">
+      <p class="corazon">💔</p>
+      <img src="https://i.imgur.com/1X0Y6cY.png" alt="me odias" width="200">
+    </div>
+  </div>
+
+  <!-- Pantalla 2 -->
+  <div class="pantalla" id="pantalla2">
+    <h2>Para pasar a la tercera pantalla...</h2>
+    <p>Me debes decir cuál es el color de nuestro corazón 💖</p>
+    <div>
+      <button onclick="respuestaColor('rojo')">Rojo ❤️</button>
+      <button onclick="respuestaColor('azul')">Azul clarito 💙</button>
+    </div>
+    <p id="mensajeColor" style="color:red; font-weight:bold;"></p>
+  </div>
+
+  <!-- Pantalla 3 -->
+  <div class="pantalla" id="pantalla3">
+    <h2>💌</h2>
+    <p>¿Quieres leer un pequeño texto que te he escrito?</p>
+    <button onclick="mostrarCarta()">¡Sí, quiero!</button>
+    <div id="carta" style="display:none; margin-top:20px;">
+      <h3>Mi carta para ti 💕</h3>
+      <p>
+       Hola celia, soy yo tu jonito, te escribo esto
+por que hay veces que por mucho que sea
+todo lo sin vergüenza que soy ante ti no
+puedo tener esa fachada.
+Se que te digo muchas cosas bonitas al
+cabo del dia pero todo tiene una razón y
+queria sincerarme contigo y abrirme por
+que te lo mereces y te amo sinceramente.
+Nunca había tenido algo tan puro y bonito
+como lo que estamos formando en
+nuestra relación y siempre había creido en
+el amor verdadero y por primera vez siento
+que si esto no es debe ser lo mas cercano
+que ha estado nadie nunca.
+Me da miedo siempre que estoy contigo
+por que haces que vuelva a sentirme un
+niño pequeño cuando tiene su mantita
+favorita o ve a su persona favorita, los
+niños lo disfrutan todo un poco mas que
+los adolescentes o los adultos, contigo yo
+me siento eso, un niño pequeño que tiene
+lo que mas le gusta del mundo y no lo
+quiere perder por nada.
+Como siempre decimos, nuestra relación
+es de hace muy poco pero siento que
+llevamos mucho más, tengo mas
+confianza contigo de lo que jamás me
+imagine que podría tener con cualquier
+persona.
+Quiero sincerarme un poco sobre por que
+siempre me preocupo por ti, aparte de
+todo es por que en el fondo de mi corazón
+me siento un poco insuficiente para ti,
+creo que eres una mujer radiante que
+quiere comerse el mundo y yo a veces te
+freno un poco, se que no piensas así pero
+detrás de toda la seguridad propia que
+tengo hay un jonito al que le has roto
+todos los esquemas y la novedad siempre
+la ha traído malos momentos, contigo
+cambia eso y me haces muy feliz a la par
+que se me estremece el corazón cuando
+pasa algo entre nosotros.
+Después de los ultimos meses los cuales
+han sido los mas bonitos que recuerdo en
+mas tiempo del que me gustaría, solo
+queria agradecerte la oportunidad de
+intentar hacerte feliz, mostrarte mis
+sentimientos y de poder compartir tus
+logros mientras estoy a tu lado.
+No quiero ser pesado y por aqui lo dejaré
+no sin antes repetir, aunque da igual
+cuantas veces lo diga siempre serán mis
+palabras favoritas para decirte, sobre toрo
+por que son muy ciertas;
+Te amo y no creo, se a ciencia cierta que
+eres la mujer de mi vida, un besito espero
+que te guste. Tu Jonito
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function irPantalla(num) {
+      document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("active"));
+      document.getElementById("pantalla" + num).classList.add("active");
+    }
+
+    function mostrarCorazon() {
+      document.getElementById("corazonRoto").style.display = "block";
+    }
+
+    function respuestaColor(color) {
+      const mensaje = document.getElementById("mensajeColor");
+      if(color === "rojo") {
+        mensaje.textContent = "Pensé que nos conocíamos más...";
+      } else {
+        irPantalla(3);
+      }
+    }
+
+    function mostrarCarta() {
+      document.getElementById("carta").style.display = "block";
+    }
+  </script>
+</body>
+</html>
