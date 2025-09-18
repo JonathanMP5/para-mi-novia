@@ -8,39 +8,24 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      height: 100vh;
+      background: #ffe6f0;
       text-align: center;
       overflow: hidden;
-      background: #ffe6f0;
-      cursor: none; /* ocultamos cursor para efecto corazones */
-    }
-
-    /* GIF de fondo */
-    #gifFondo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      display: none;
     }
 
     .pantalla {
       display: none;
       flex-direction: column;
       gap: 20px;
-      max-width: 600px;
+      max-width: 700px;
       padding: 30px;
       background: rgba(255,255,255,0.95);
       border-radius: 20px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.25);
       position: relative;
-      z-index: 2;
-      margin: auto;
-      top: 50%;
-      transform: translateY(-50%);
+      margin: 20px auto;
+      max-height: 80vh;
+      overflow-y: auto; /* Scroll vertical si es muy largo */
     }
 
     .pantalla.active {
@@ -76,59 +61,16 @@
     #carta p {
       font-size: 18px;
       line-height: 1.6;
-      white-space: pre-wrap; /* conserva saltos de línea */
+      white-space: pre-wrap;
     }
 
-    /* Carta scrollable para textos largos */
-    #carta {
-      display: none;
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 15px;
-      background: rgba(255,255,255,0.9);
-      position: relative;
-      z-index: 2;
-      max-height: 60vh;
-      overflow-y: auto;
-    }
-
-    /* Corazones flotando */
-    .corazonFlotante {
-      position: fixed;
-      font-size: 20px;
-      color: pink;
-      opacity: 0.8;
-      animation: float linear infinite;
-      z-index: 1;
-    }
-
-    /* Confeti de corazones */
-    .confeti {
-      position: fixed;
-      font-size: 20px;
-      color: #ff69b4;
-      animation: fall 3s linear forwards;
-      z-index: 3;
-    }
-
-    @keyframes float {
-      0% {transform: translateY(100vh) scale(0.5);}
-      100% {transform: translateY(-50px) scale(1);}
-    }
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
     }
-    @keyframes fall {
-      0% {transform: translateY(-50px) rotate(0deg);}
-      100% {transform: translateY(100vh) rotate(360deg);}
-    }
   </style>
 </head>
 <body>
-
-  <!-- GIF de fondo -->
-  <img id="gifFondo" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Gatos abrazándose">
 
   <!-- Pantalla 1 -->
   <div class="pantalla active" id="pantalla1">
@@ -140,7 +82,7 @@
     </div>
     <div id="corazonRoto" style="display:none;">
       <p class="corazon">💔</p>
-      <img src="https://i.imgur.com/1X0Y6cY.png" alt="me odias" width="200">
+      <p>Me odias 😢</p>
     </div>
   </div>
 
@@ -157,13 +99,10 @@
 
   <!-- Pantalla 3 -->
   <div class="pantalla" id="pantalla3">
-    <h2>💌</h2>
-    <p>¿Quieres leer un pequeño texto que te he escrito?</p>
-    <button onclick="mostrarCarta()">¡Sí, quiero!</button>
+    <h2>💌 Mi carta para ti 💕</h2>
     <div id="carta">
-      <h3>Mi carta para ti 💕</h3>
       <p>
-  Hola celia, soy yo tu jonito, te escribo esto
+Hola celia, soy yo tu jonito, te escribo esto
 por que hay veces que por mucho que sea
 todo lo sin vergüenza que soy ante ti no
 puedo tener esa fachada.
@@ -226,7 +165,6 @@ que te guste. Tu Jonito
   </div>
 
   <script>
-    // Navegación entre pantallas
     function irPantalla(num) {
       document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("active"));
       document.getElementById("pantalla" + num).classList.add("active");
@@ -244,56 +182,10 @@ que te guste. Tu Jonito
         irPantalla(3);
       }
     }
-
-    function mostrarCarta() {
-      document.getElementById("gifFondo").style.display = "block";
-      document.getElementById("carta").style.display = "block";
-      lanzarConfeti();
-    }
-
-    // Corazones flotantes
-    function crearCorazones() {
-      for(let i=0;i<20;i++){
-        const heart = document.createElement('div');
-        heart.className = 'corazonFlotante';
-        heart.textContent = '💖';
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.animationDuration = (3 + Math.random()*5) + 's';
-        heart.style.fontSize = (15 + Math.random()*30) + 'px';
-        document.body.appendChild(heart);
-      }
-    }
-    crearCorazones();
-
-    // Corazones que siguen el cursor
-    document.addEventListener('mousemove', e => {
-      const heart = document.createElement('div');
-      heart.className = 'corazonFlotante';
-      heart.textContent = '💖';
-      heart.style.left = e.clientX + 'px';
-      heart.style.top = e.clientY + 'px';
-      heart.style.fontSize = (10 + Math.random()*20) + 'px';
-      heart.style.opacity = 0.8;
-      heart.style.animation = 'float 3s linear forwards';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 3000);
-    });
-
-    // Confeti de corazones al mostrar carta
-    function lanzarConfeti() {
-      for(let i=0;i<50;i++){
-        const conf = document.createElement('div');
-        conf.className = 'confeti';
-        conf.textContent = '💖';
-        conf.style.left = Math.random() * window.innerWidth + 'px';
-        conf.style.fontSize = (10 + Math.random()*30) + 'px';
-        conf.style.animationDuration = (2 + Math.random()*3) + 's';
-        document.body.appendChild(conf);
-        setTimeout(() => conf.remove(), 4000);
-      }
-    }
   </script>
 </body>
 </html>
+
+
 
 
