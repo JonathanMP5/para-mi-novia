@@ -12,7 +12,7 @@
       text-align: center;
       overflow: hidden;
       background: #ffe6f0;
-      cursor: none; /* ocultamos el cursor para efecto de corazones */
+      cursor: none; /* ocultamos cursor para efecto corazones */
     }
 
     /* GIF de fondo */
@@ -76,6 +76,20 @@
     #carta p {
       font-size: 18px;
       line-height: 1.6;
+      white-space: pre-wrap; /* conserva saltos de línea */
+    }
+
+    /* Carta scrollable para textos largos */
+    #carta {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.9);
+      position: relative;
+      z-index: 2;
+      max-height: 60vh;
+      overflow-y: auto;
     }
 
     /* Corazones flotando */
@@ -149,7 +163,7 @@
     <div id="carta">
       <h3>Mi carta para ti 💕</h3>
       <p>
-       Hola celia, soy yo tu jonito, te escribo esto
+  Hola celia, soy yo tu jonito, te escribo esto
 por que hay veces que por mucho que sea
 todo lo sin vergüenza que soy ante ti no
 puedo tener esa fachada.
@@ -282,6 +296,4 @@ que te guste. Tu Jonito
 </body>
 </html>
 
-</body>
-</html>
 
